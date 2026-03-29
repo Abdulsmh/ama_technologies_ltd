@@ -10,12 +10,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <i class="fas fa-sun"></i>
-        <i class="fas fa-moon"></i>
-    </button>
-
     <!-- Header -->
     <header>
         <div class="container">
@@ -29,6 +23,9 @@
                         <span>innovation · automation · design</span>
                     </div>
                 </div>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
                 <div class="nav-links">
                     <a href="#home" class="nav-link">Home</a>
                     <a href="#services" class="nav-link">Services</a>
@@ -36,13 +33,20 @@
                     <a href="#testimonials" class="nav-link">Reviews</a>
                     <a href="#faq" class="nav-link">FAQ</a>
                     <a href="#contact" class="btn-glow">Get Quote</a>
-                </div>
-                <div class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
+                    <button class="theme-toggle-mobile" id="themeToggleMobile" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
+
+    <!-- Theme Toggle Button (Desktop) -->
+    <button class="theme-toggle-desktop" id="themeToggleDesktop" aria-label="Toggle dark mode">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </button>
 
     <main>
         <!-- Hero Section -->
@@ -58,7 +62,7 @@
                         Empower Your Business 
                         <span class="gradient-text">with Tech & Creative Mastery</span>
                     </h1>
-                    <p class="hero-subtitle">Web development  · Graphic design  · POS Services  · Phone setup  · Online and offline cafe service· Data solutions — we bridge creativity and technology to solve real business problems.</p>
+                    <p class="hero-subtitle">Web development · Graphic design · POS Services · Phone setup · Online and offline cafe service · Data solutions — we bridge creativity and technology to solve real business problems.</p>
                     <div class="hero-buttons">
                         <a href="#services" class="btn-primary">
                             <i class="fas fa-arrow-right"></i> Explore services
@@ -97,9 +101,7 @@
                     <h2 class="section-title">Comprehensive <span class="gradient-text">Tech & Creative</span> Solutions</h2>
                     <p class="section-subhead">From custom software & POS to stunning invitations & phone setup — we've got your business & personal needs covered.</p>
                 </div>
-                <div class="services-grid" id="servicesGrid">
-                    <!-- Services are populated by JavaScript -->
-                </div>
+                <div class="services-grid" id="servicesGrid"></div>
             </div>
         </section>
 
@@ -148,9 +150,7 @@
                     <p class="section-subhead">Trusted by businesses, event planners, and individuals across Nigeria</p>
                 </div>
                 <div class="swiper testimonial-swiper">
-                    <div class="swiper-wrapper">
-                        <!-- Testimonials will be populated by JavaScript -->
-                    </div>
+                    <div class="swiper-wrapper"></div>
                     <div class="swiper-pagination"></div>
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
@@ -166,9 +166,7 @@
                     <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
                     <p class="section-subhead">Quick answers to common questions</p>
                 </div>
-                <div class="faq-grid">
-                    <!-- FAQ items will be populated by JavaScript -->
-                </div>
+                <div class="faq-grid"></div>
             </div>
         </section>
 

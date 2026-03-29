@@ -4,7 +4,7 @@ const servicesData = [
         icon: "fas fa-laptop-code",
         title: "Web & Software Dev",
         description: "Custom websites, web apps, business automation, front-end engineering, and legacy system upgrades.",
-        tags: ["React", "Automation", "Databases", "E.T.C"]
+        tags: ["React", "Automation", "Databases"]
     },
     {
         icon: "fas fa-palette",
@@ -167,16 +167,17 @@ function populateFAQ() {
     }
 }
 
-// Theme Toggle
+// Theme Toggle (Combined for both desktop and mobile)
 function initTheme() {
-    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleDesktop = document.getElementById('themeToggleDesktop');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
     const savedTheme = localStorage.getItem('theme');
     
     if (savedTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
     }
     
-    themeToggle.addEventListener('click', () => {
+    const toggleTheme = () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         if (currentTheme === 'dark') {
             document.documentElement.removeAttribute('data-theme');
@@ -185,18 +186,60 @@ function initTheme() {
             document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
         }
-    });
+    };
+    
+    if (themeToggleDesktop) {
+        themeToggleDesktop.addEventListener('click', toggleTheme);
+    }
+    
+    if (themeToggleMobile) {
+        themeToggleMobile.addEventListener('click', toggleTheme);
+    }
 }
 
 // Mobile Menu
 function initMobileMenu() {
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
+    const navLinksItems = document.querySelectorAll('.nav-link');
+    const getQuoteBtn = document.querySelector('.btn-glow');
     
     if (mobileBtn && navLinks) {
         mobileBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            // Change icon
+            const icon = mobileBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden';
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
         });
+        
+        // Close menu when clicking on a link
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        if (getQuoteBtn) {
+            getQuoteBtn.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            });
+        }
     }
 }
 
@@ -208,11 +251,6 @@ function initSmoothScroll() {
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Close mobile menu if open
-                const navLinks = document.querySelector('.nav-links');
-                if (navLinks && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
             }
         });
     });
@@ -227,14 +265,12 @@ function initForm() {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             
-            // Show loading state
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
             
             try {
-                // Simulate form submission (replace with actual formspree or emailjs)
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 alert(`Thank you ${data.name}! Your message has been received. We'll get back to you within 24 hours.`);
                 form.reset();
@@ -279,10 +315,11 @@ function initSwiper() {
         loop: true,
         autoplay: { delay: 5000, disableOnInteraction: false },
         pagination: { el: '.swiper-pagination', clickable: true },
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        navigation: { nextEl: '.swiper-button-prev', prevEl: '.swiper-button-next' },
         slidesPerView: 1,
         spaceBetween: 30,
         breakpoints: {
+            640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 }
         }
